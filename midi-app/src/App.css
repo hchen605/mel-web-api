@@ -1,0 +1,61 @@
+/* App.css */
+
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.App {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #333;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+label {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+input[type="file"] {
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="number"] {
+  background-color: #555;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  width: 200px;
+  text-align: center;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
