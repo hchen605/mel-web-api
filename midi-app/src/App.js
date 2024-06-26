@@ -25,15 +25,15 @@ function App() {
     formData.append('tempo', tempo);
 
     try {
-      const response = await axios.post('http://localhost:8000/generate', formData, {
+      const response = await axios.post('http://127.0.0.1:8000/generate', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
       console.log('MIDI generated:', response.data);
       setDownloadLinks([
-        { label: 'Download Piano Arrangement', url: `http://localhost:8000/download/${response.data.piano_path.split('/').pop()}` },
-        { label: 'Download Band Arrangement', url: `http://localhost:8000/download/${response.data.band_path.split('/').pop()}` },
+        { label: 'Download Piano Arrangement', url: `http://127.0.0.1:8000/download/${response.data.piano_path.split('/').pop()}` },
+        { label: 'Download Band Arrangement', url: `http://127.0.0.1:8000/download/${response.data.band_path.split('/').pop()}` },
       ]);
       setError(null); // Clear any previous errors
     } catch (error) {
@@ -44,28 +44,35 @@ function App() {
 
   return (
     <div className="App">
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Upload File</label>
-          <input type="file" onChange={handleFileChange} />
+      <header className="header">
+        <img src="/logo.png" alt="Melception Logo" className="logo" />
+        <h1 className="title">Melception</h1>
+      </header>
+      <form onSubmit={handleSubmit} className="form-container">
+        <div className="input-group">
+          <label className="upload-label">
+            Upload File
+            <input type="file" onChange={handleFileChange} className="file-input" />
+          </label>
+          {file && <span className="file-name">{file.name}</span>}
         </div>
-        <div>
+        <div className="input-group">
           <label>Segment</label>
-          <input type="text" value={segment} onChange={(e) => setSegment(e.target.value)} />
+          <input type="text" value={segment} onChange={(e) => setSegment(e.target.value)} className="text-input" />
         </div>
-        <div>
-          <label>Rhythm Intensity</label>
-          <input type="number" value={rhythm} onChange={(e) => setRhythm(e.target.value)} />
-        </div>
-        <div>
-          <label>Polyphonic Density</label>
-          <input type="number" value={polyphony} onChange={(e) => setPolyphony(e.target.value)} />
-        </div>
-        <div>
+        <div className="input-group">
           <label>BPM</label>
-          <input type="number" value={tempo} onChange={(e) => setTempo(e.target.value)} />
+          <input type="number" value={tempo} onChange={(e) => setTempo(e.target.value)} className="text-input" />
         </div>
-        <button type="submit">Generate</button>
+        <div className="input-group">
+          <label>Rhythm Intensity</label>
+          <input type="number" value={rhythm} onChange={(e) => setRhythm(e.target.value)} className="text-input" />
+        </div>
+        <div className="input-group">
+          <label>Polyphonic Density</label>
+          <input type="number" value={polyphony} onChange={(e) => setPolyphony(e.target.value)} className="text-input" />
+        </div>
+        <button type="submit" className="generate-button">Generation</button>
       </form>
       {error && (
         <div className="error">
@@ -74,10 +81,10 @@ function App() {
         </div>
       )}
       {downloadLinks.length > 0 && (
-        <div>
+        <div className="download-links">
           {downloadLinks.map((link, index) => (
             <div key={index}>
-              <button onClick={() => window.location.href = link.url}>{link.label}</button>
+              <button onClick={() => window.location.href = link.url} className="download-button">{link.label}</button>
             </div>
           ))}
         </div>

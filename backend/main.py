@@ -39,8 +39,8 @@ async def generate(
         file_object.write(file.file.read())
 
     # Define paths for generated files
-    arrangement_piano_path = os.path.join(GENERATED_DIR, "arrangement_piano_.mid")
-    arrangement_band_path = os.path.join(GENERATED_DIR, "arrangement_band_.mid")
+    arrangement_piano_path = os.path.join(GENERATED_DIR, "arrangement_piano_1.mid")
+    arrangement_band_path = os.path.join(GENERATED_DIR, "arrangement_band_1.mid")
 
     # Set the PYTHONPATH to include the directory of your scripts
     env = os.environ.copy()
