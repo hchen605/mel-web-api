@@ -10,6 +10,7 @@ function App() {
   const [tempo, setTempo] = useState(100);
   const [downloadLinks, setDownloadLinks] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false); // Loading state
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -17,6 +18,7 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when the generation starts
     const formData = new FormData();
     formData.append('file', file);
     formData.append('segment', segment);
@@ -39,6 +41,8 @@ function App() {
     } catch (error) {
       console.error('Error generating MIDI:', error.response ? error.response.data : error.message);
       setError(error.response ? error.response.data : { message: error.message });
+    } finally {
+      setLoading(false); // Set loading to false when the generation is complete
     }
   };
 
@@ -72,7 +76,12 @@ function App() {
           <label>Polyphonic Density</label>
           <input type="number" value={polyphony} onChange={(e) => setPolyphony(e.target.value)} className="text-input" />
         </div>
-        <button type="submit" className="generate-button">Generation</button>
+        <div className="button-container">
+          <button type="submit" className="generate-button" disabled={loading}>
+            {loading ? 'Processing ...' : 'Generate'}
+          </button>
+          {loading && <div className="spinner"></div>} {/* Show spinner when loading */}
+        </div>
       </form>
       {error && (
         <div className="error">

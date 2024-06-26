@@ -49,7 +49,7 @@ label {
 
 .upload-label {
   display: inline-block;
-  background-color: #422b7e;
+  background-color: #432b84;
   color: #fff;
   border: none;
   padding: 10px;
@@ -120,4 +120,19 @@ label {
   background-color: #333;
   padding: 10px;
   border-radius: 5px;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-left-color: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
