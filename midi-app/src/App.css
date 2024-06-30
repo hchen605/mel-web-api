@@ -129,7 +129,7 @@ label {
   width: 24px;
   height: 24px;
   animation: spin 1s linear infinite;
-  margin-left: 10px;
+  margin-left: 40px;
 }
 
 @keyframes spin {

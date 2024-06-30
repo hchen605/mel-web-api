@@ -8,7 +8,7 @@ function App() {
   const [rhythm, setRhythm] = useState(3);
   const [polyphony, setPolyphony] = useState(2);
   const [tempo, setTempo] = useState(100);
-  const [downloadLinks, setDownloadLinks] = useState([]);
+  const [downloadLink, setDownloadLink] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false); // Loading state
 
@@ -33,10 +33,10 @@ function App() {
         },
       });
       console.log('MIDI generated:', response.data);
-      setDownloadLinks([
-        { label: 'Download Piano Arrangement', url: `http://127.0.0.1:8000/download/${response.data.piano_path.split('/').pop()}` },
-        { label: 'Download Band Arrangement', url: `http://127.0.0.1:8000/download/${response.data.band_path.split('/').pop()}` },
-      ]);
+      setDownloadLink({
+        label: 'Download Band Arrangement',
+        url: `http://127.0.0.1:8000/download/${response.data.band_path.split('/').pop()}`,
+      });
       setError(null); // Clear any previous errors
     } catch (error) {
       console.error('Error generating MIDI:', error.response ? error.response.data : error.message);
@@ -89,13 +89,9 @@ function App() {
           {error.details && <pre>{JSON.stringify(error.details, null, 2)}</pre>}
         </div>
       )}
-      {downloadLinks.length > 0 && (
-        <div className="download-links">
-          {downloadLinks.map((link, index) => (
-            <div key={index}>
-              <button onClick={() => window.location.href = link.url} className="download-button">{link.label}</button>
-            </div>
-          ))}
+      {downloadLink && (
+        <div className="download-link">
+          <button onClick={() => window.location.href = downloadLink.url} className="download-button">{downloadLink.label}</button>
         </div>
       )}
     </div>
