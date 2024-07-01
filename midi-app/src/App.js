@@ -27,7 +27,7 @@ function App() {
     formData.append('tempo', tempo);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/generate', formData, {
+      const response = await axios.post('http://api.melception.com:8000/generate', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -35,7 +35,7 @@ function App() {
       console.log('MIDI generated:', response.data);
       setDownloadLink({
         label: 'Download Band Arrangement',
-        url: `http://127.0.0.1:8000/download/${response.data.band_path.split('/').pop()}`,
+        url: `http://api.melception.com:8000/download/${response.data.band_path.split('/').pop()}`,
       });
       setError(null); // Clear any previous errors
     } catch (error) {

@@ -1,0 +1,14 @@
+[Unit]
+Description=My FastAPI Application
+After=network.target
+
+[Service]
+User=hchen
+Group=hchen
+WorkingDirectory=/home/hchen/mel-init-web/backend
+ExecStart=/home/hchen/mel-init-web/backend/start.sh
+Restart=always
+Environment="PATH=/usr/local/cuda/bin:/home/hchen/miniconda3/envs/mel-init/bin:/home/hchen/miniconda3/condabin:/usr/local/bin:/usr/bin:/bin"
+
+[Install]
+WantedBy=multi-user.target
